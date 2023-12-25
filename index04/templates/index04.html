@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html class="use-all-space">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="UTF-8" />
+    <title>My Map</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+      <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps.css"
+  />
+      
+    <style>
+      
+table {
+      
+      float: left;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+td{
+  height: 30px;
+  
+}
+
+div{
+ margin-top: 30px;
+ margin-bottom: 30px;
+}
+
+#content{
+ width: 1000px;
+ margin-left: auto;
+ margin-right: auto;
+}
+      #map {
+        width: 800px;
+        height: 600px;
+      }
+
+    </style>
+  </head>
+  <body >
+    <div>
+        <p>Pname={{bb[-1]}}</p> 
+        <p>PositionLon={{Lon[-1]}}</p> 
+         <p>PositionLat= {{Lat[-1]}}</p> 
+         </div>
+    <div>
+        <form method="POST" action="/">
+  
+          <select name="Gcity" method="GET" action="/">
+              <option  selected></option>
+              {% for d in RName[:] %}
+                <option value="{{d}}">{{d}}</option>
+              {% endfor %}
+                </select>
+                <input type="submit" value ="Submit">
+              </form>
+          
+  </div>
+  <hr>
+    
+  
+  {% for key, value in getAll.items() %}  
+
+  
+  <table >
+          {% if key == 'Pname' %}
+          {% for Pname in value %}
+          <tr>
+            <td>{{ Pname}}</td> 
+          </tr>
+          {% endfor %}
+          {% endif %}
+  
+          {% if key == 'Paddress' %}  
+          {% for Paddress in value %}
+          <tr>
+            <td>{{ Paddress}}</td>  
+          </tr>
+          {% endfor %}
+          {% endif %}
+  
+          {% if key == 'PositionLat' %}  
+          {% for PositionLat in value %}
+          <tr>
+            <td>{{ PositionLat}}</td>  
+          </tr>
+          {% endfor %}
+          {% endif %}
+  
+          {% if key == 'PositionLon' %}  
+          {% for PositionLon in value %}
+          <tr>
+            <td>{{ PositionLon}}</td>  
+          </tr>
+          {% endfor %}
+          {% endif %}          
+  
+  
+          </table>
+  
+     {% endfor %}      
+</div>
+
+    <div id="map" class="map"></div>
+    <!-- Replace version in the URL with desired library version -->
+    <script  src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps-web.min.js"></script>
+    <script type="text/javascript"> 
+
+          var mlon = '{{Lon[-1]}}'
+          var mlat = '{{Lat[-1]}}'
+          var rname='{{bb[-1]}}'
+
+      //let center=[121.51517341247079, 25.048362905598577]
+      center=[mlon,mlat]
+      var map = tt.map({
+        key: "xxxxx",
+        container: "map",
+        center: center,
+        zoom: 15,
+      })
+
+      map.on("load", function () {
+        map.showTrafficFlow()
+        
+      })
+
+		var marker = new tt.Marker().setLngLat(center).addTo(map);
+		var popupOffsets = {
+		  top: [0, 0],
+		  bottom: [0, 20],
+		  'bottom-right': [0, -70],
+		  'bottom-left': [0, -70],
+		  left: [25, -35],
+		  right: [-25, -35]
+		}
+
+		var popup = new tt.Popup({offset: popupOffsets}).setHTML(rname);
+	    marker.setPopup(popup).togglePopup();
+    </script>
+  </body>
+</html>
