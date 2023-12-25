@@ -207,16 +207,13 @@ def handle_message(event):
     if myT == "map":
         P01 = Pre01()       
         line_bot_api.reply_message(event.reply_token,P01)
-    elif myT == "小南門":
-        P01 = Pre01()       
+    elif myT == "小南門":               
         line_bot_api.reply_message(event.reply_token, LocationSendMessage(title='Location message test', address='小南門', latitude = 25.048031, longitude = 121.517356))
         
-    elif myT == "塔美爾尼泊爾咖哩":
-        P01 = Pre01()       
+    elif myT == "塔美爾尼泊爾咖哩":               
         line_bot_api.reply_message(event.reply_token, LocationSendMessage(title='Location message test', address='塔美爾尼泊爾咖哩', latitude = 25.047924, longitude = 121.517131))
 
-    elif myT == "大戶屋":
-        P01 = Pre01()       
+    elif myT == "大戶屋":               
         line_bot_api.reply_message(event.reply_token, LocationSendMessage(title='Location message test', address='大戶屋', latitude = 25.047924, longitude = 121.51708))
    
     else:
