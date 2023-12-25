@@ -5,6 +5,6 @@ https://developer.tomtom.com/search-api/documentation/product-information/introd
 台北車站  
 25.047846496934394, 121.51740617725997  
 zh-TW  
-poiCategories=7315
+poiCategories=7315餐廳
   
 
