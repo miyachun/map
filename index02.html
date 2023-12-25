@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="use-all-space">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="UTF-8" />
+    <title>My Map</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+      <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps.css"
+  />
+      
+    <style>
+      
+table {
+      
+      float: left;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+td{
+  height: 30px;
+  
+}
+
+div{
+ margin-top: 30px;
+ margin-bottom: 30px;
+}
+
+#content{
+ width: 1000px;
+ margin-left: auto;
+ margin-right: auto;
+}
+      #map {
+        width: 800px;
+        height: 600px;
+      }
+
+    </style>
+  </head>
+  <body >
+
+    <div id="map" class="map"></div>
+    <!-- Replace version in the URL with desired library version -->
+    <script  src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps-web.min.js"></script>
+    <script> 
+
+
+
+      let center=[121.51517341247079, 25.048362905598577]
+      var map = tt.map({
+        key: "xxxxx",
+        container: "map",
+        center: center,
+        zoom: 15,
+      })
+
+      map.on("load", function () {
+        map.showTrafficFlow()
+       
+      })
+
+		var marker = new tt.Marker().setLngLat(center).addTo(map);
+
+		var popupOffsets = {
+		  top: [0, 0],
+		  bottom: [0, 20],
+		  'bottom-right': [0, -70],
+		  'bottom-left': [0, -70],
+		  left: [25, -35],
+		  right: [-25, -35]
+		}
+
+		var popup = new tt.Popup({offset: popupOffsets}).setHTML("台北車站");
+	    marker.setPopup(popup).togglePopup();
+
+
+    </script>
+  </body>
+</html>

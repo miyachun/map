@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html class="use-all-space">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="UTF-8" />
+    <title>My Map</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+      <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps.css"
+  />
+      
+    <style>
+      
+table {
+      
+      float: left;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+td{
+  height: 30px;
+  
+}
+
+div{
+ margin-top: 30px;
+ margin-bottom: 30px;
+}
+
+#content{
+ width: 1000px;
+ margin-left: auto;
+ margin-right: auto;
+}
+      #map {
+        width: 800px;
+        height: 600px;
+      }
+
+    </style>
+  </head>
+  <body >
+
+  
+    <div id="map" class="map"></div>
+    <!-- Replace version in the URL with desired library version -->
+    <script  src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps-web.min.js"></script>
+    <script> 
+
+
+
+      let center=[121.51517341247079, 25.048362905598577]
+      var map = tt.map({
+        key: "xxxxx",
+        container: "map",
+        center: center,
+        zoom: 15,
+      })
+
+      map.on("load", function () {
+        map.showTrafficFlow()
+      })
+
+
+map.on("load", function () {
+  
+  map.addLayer({
+    id: "overlay",
+    type: "fill",
+    source: {
+      type: "geojson",
+      data: {
+        type: "Feature",
+        geometry: {
+          type: "Polygon",
+          coordinates: [
+            [
+             
+              [121.52830511718942,25.047346550124775],
+              [121.5116114391156,25.047390922072605],
+              [121.51929328526715,25.044086120447496],
+           
+             
+            ],
+          ],
+        },
+      },
+    },
+    layout: {},
+    paint: {
+      "fill-color": "#db356c",
+      "fill-opacity": 0.5,
+      "fill-outline-color": "black",
+    },
+  })
+})
+
+    </script>
+  </body>
+</html>
