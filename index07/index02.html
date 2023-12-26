@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+    <title>Quick Start</title>
+    <style>
+   #map {
+  position: absolute;
+  
+  width: 800px;
+  height: 600px;
+}
+
+a.skiplink {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+a.skiplink:focus {
+  clip: auto;
+  height: auto;
+  width: auto;
+  background-color: #fff;
+  padding: 0.3em;
+}
+#map:focus {
+  outline: #4A74A8 solid 0.15em;
+}
+    </style>
+  </head>
+  <body>
+<a class="skiplink" href="#map">Go to map</a>
+
+<button id="zoom-out">Zoom out</button>
+<button id="zoom-in">Zoom in</button>
+ <div id="map" class="map" tabindex="0"></div>
+    <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+    <script>
+        var map = new ol.Map({
+  target: 'map',
+  layers: [
+    new ol.layer.Tile({
+      source: new ol.source.OSM(),
+    }),
+  ],
+  view: new ol.View({
+    center: ol.proj.fromLonLat([121.51517341247079, 25.048362905598577 ]),
+    zoom: 15,
+  }),
+});
+document.getElementById('zoom-out').onclick = function () {
+  const view = map.getView();
+  const zoom = view.getZoom();
+  view.setZoom(zoom - 1);
+};
+
+document.getElementById('zoom-in').onclick = function () {
+  const view = map.getView();
+  const zoom = view.getZoom();
+  view.setZoom(zoom + 1);
+};
+    </script>
+  </body>
+</html>

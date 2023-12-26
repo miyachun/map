@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+    <title>Quick Start</title>
+    <style>
+   #map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+    <script>
+        var map = new ol.Map({
+  target: 'map',
+  layers: [
+    new ol.layer.Tile({
+      source: new ol.source.TileJSON({
+        url:'https://api.maptiler.com/maps/basic-v2/tiles.json?key=xxxxx', 
+        //url:'https://api.maptiler.com/maps/satellite/tiles.json?key=xxxxx',
+        tileSize:512
+      }),
+    }),
+  ],
+  view: new ol.View({
+    center: ol.proj.fromLonLat([121.51517341247079, 25.048362905598577 ]),
+    zoom: 16,
+  }),
+});
+
+const marker= new ol.layer.Vector({
+    source:new ol.source.Vector({
+        features:[
+            new ol.Feature({
+                geometry:new ol.geom.Point(
+                    ol.proj.fromLonLat([121.51517341247079, 25.048362905598577 ])
+                )
+            })
+        ],
+    }),
+    style:new ol.style.Style({
+        image:new ol.style.Icon({
+            src:'icon01.png'
+        })
+    })
+})
+map.addLayer(marker)
+    </script>
+  </body>
+</html>
